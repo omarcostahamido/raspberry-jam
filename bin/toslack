@@ -1,0 +1,26 @@
+#!/bin/bash
+#
+# Send a message (either argument vector or stdin) to a slack webhook URL
+#
+# Usage:   slackme "This message will show up in a slack channel."
+#
+# Pro-tip: preserve linefeeds with:  slackme $(command | tr '\n' '\r')
+#
+
+# This webhook is for the private #raspberry-jam-notify channel
+WEBHOOK='https://hooks.slack.com/services/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'
+
+if [[ $1 ]]; then
+  MESSAGE="$*"
+else
+  IFS=  read -d '' -r MESSAGE
+fi
+
+echo "Sending:"
+echo "$MESSAGE"
+
+curl -X POST -H 'Content-type: application/json'  \
+    --data "{\"text\": \"$MESSAGE\"}"  $WEBHOOK
+
+exit 0
+

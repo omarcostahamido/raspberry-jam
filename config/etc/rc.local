@@ -19,11 +19,18 @@ fi
 
 # Find and print the external IP
 curl -s https://www.get-myip.com/ | fgrep 'Current' | sed "s/<[^>]\+>//g" \
-  | /home/pi/bin/toslack
+    | /home/pi/bin/toslack
 
 # Start server-mode jackd
-jackd -P70 -dalsa -dhw:sndrpihifiberry -r44100 -p128 -n2 -s -S < /dev/null > tee /tmp/jackd.out &
 
-service procps force-reload
+# Hardware sound card
+# jackd -P70 -dalsa -dhw:sndrpihifiberry -r44100 -p128 -n2 -s -S  > /var/log/jackd.out \
+#   < /dev/null &
+
+# USB sound interface
+jackd -P70 -dalsa -dhw:sndrpihifiberry -r48000 -p256 -n2 -s -S  > /var/log/jackd.out  \
+    < /dev/null &
+
+systemctl force-reload procps
 
 exit 0

@@ -8,7 +8,7 @@
 #
 
 # This webhook is for the private #raspberry-jam-notify channel
-WEBHOOK='https://hooks.slack.com/services/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'
+WEBHOOK='https://hooks.slack.com/services/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'
 
 if [[ $1 ]]; then
   MESSAGE="$*"

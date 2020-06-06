@@ -1,0 +1,9 @@
+These files came from caguayo-jam4 on Fri May  8 23:20:26 PDT 2020
+
+It turns out that each sound card requires a custom hacking of /boot/config.txt to
+reflect the audio hardware that's installed.
+
+This is unfortunate, this means that we need to keep a set of possible overlays
+in order to push the right one.  The boot directory contains a version of config.txt
+for each of the different sound cards we've tested.
+
